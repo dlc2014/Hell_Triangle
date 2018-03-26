@@ -34,13 +34,22 @@ O método setUp é utilizado para instanciar a classe principal.
 Os testes são:
 
 test_way_of_chalenge : #Testa triângulo do desafio
+
 test_long_way : #Testa um um triângulo com caminho mais longo
+
 test_other_way : #Testa outro caminho que quebraria a busca se tivesse usado a lógica de escolher o filho com maior valor (isso me tirou da casca de banana no desafio)
+
 test_way_of_right : #Testa o caminho descendo pela direita
+
 test_way_left : #Testa o caminho descendo pela esquerda
+
 test_way_of_center : #Testa o caminho descendo pelo centro
+
 test_is_valid_triangle : #Testa o metodo que valida se é um triangulo válido
+
 test_is_not_valid_triangle : #Testa o cenário de triângulo não válido
+
 test_select_max_way_on_triangle_return_ok : # Testa o retorno do ´método principal
+
 test_select_max_way_on_triangle_return_not_ok : #Teste alerta de triângulo não válido
 
