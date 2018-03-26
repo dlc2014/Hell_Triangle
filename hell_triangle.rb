@@ -7,8 +7,8 @@ class HellTriangle
 
 	#Método principal
 	def select_max_way_on_triangle(array_triangle)
-			
-			if is_valid_triangle?(array_triangle)
+		
+		if is_valid_triangle?(array_triangle)
 
 				#Monta o gabarito de caminhos
 				array_caminhos = monta_gabarito(array_triangle)
@@ -39,12 +39,12 @@ class HellTriangle
 			else
 				return "Não é um triângulo válido!"
 			end
-	end
+		end
 
 	#Método recursivo para buscar os valores reais
 	def busca_filhos(caminho, obj)
 
-	 	if @caminho_real_temp.length == 0
+		if @caminho_real_temp.length == 0
 			temp = obj.select{|k,v| v['nivel'] == 0 }
 			@caminho_real_temp << temp.values[0]['value']
 		end
@@ -52,7 +52,6 @@ class HellTriangle
 		if @caminho_real_temp.length < caminho.length
 
 			obj_filho = obj.select{|k,v| v['value']== @caminho_real_temp.last && v['nivel'] == @caminho_real_temp.length - 1}
-			# puts "obj_filho - #{obj_filho.values[0]['filho'][caminho[@caminho_real_temp.length].to_i]}"
 			@caminho_real_temp << obj_filho.values[0]['filho'][caminho[@caminho_real_temp.length].to_i]
 
 			busca_filhos(caminho,obj)
@@ -112,7 +111,7 @@ class HellTriangle
 					obj[key]['pai'] << array_triangle[count_nivel-1].slice(0)
 
 				#Se for a última posição seu pai sempre será a última posição do npivel acima
-				elsif posicao == nivel.index(nivel.last)
+			elsif posicao == nivel.index(nivel.last)
 					# procura pelo pai
 					obj[key]['pai'] = []
 					obj[key]['pai'] << array_triangle[count_nivel-1].slice(array_triangle[count_nivel-1].index(array_triangle[count_nivel-1].last))
@@ -120,17 +119,17 @@ class HellTriangle
 					# Se for um npo do meio, possuirá 2 pais
 					obj[key]['pai'] = array_triangle[count_nivel-1].slice(posicao-1,posicao + 1)
 				end
-				end
-
-				if posicao == 1 
-					obj[key]['filho'] = array_triangle[count_nivel+1].slice(posicao,posicao + 1) if count_nivel < qtd_niveis
-				else
-					obj[key]['filho'] = array_triangle[count_nivel+1].slice(posicao,posicao + 2) if count_nivel < qtd_niveis
-				end
-				count_value += 1
 			end
-			count_nivel += 1
+
+			if posicao == 1 
+				obj[key]['filho'] = array_triangle[count_nivel+1].slice(posicao,posicao + 1) if count_nivel < qtd_niveis
+			else
+				obj[key]['filho'] = array_triangle[count_nivel+1].slice(posicao,posicao + 2) if count_nivel < qtd_niveis
+			end
+			count_value += 1
 		end
+		count_nivel += 1
+	end
 		#Retorna um objeto com 
 		obj
 	end
@@ -146,7 +145,7 @@ class HellTriangle
 
 		#Usa progressão geométrica para encontrar a quantidade de caminhos possíveis
 		count_nivel.times do |value|
-		  total_pg = total_pg * 2
+			total_pg = total_pg * 2
 		end
 
 		#Monta Gabarito de Caminhos possíveis
@@ -174,13 +173,13 @@ class HellTriangle
 	end
 end
 
-   
+
 #Teste direto na classe principal para observar a saída com o valor da soma do maior caminho
 #Aqui é possível modificar o parâmetro de entrada
 array_triangle = [[6],
-				 [3,5],
-				[9,7,1],
-			   [9,6,8,4]]
+[3,5],
+[9,7,1],
+[9,6,8,4]]
 
 hell = HellTriangle.new
 
