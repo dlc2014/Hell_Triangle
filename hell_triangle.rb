@@ -10,12 +10,14 @@ class HellTriangle
 			
 			if is_valid_triangle?(array_triangle)
 
-				
+				#Monta o gabarito de caminhos
 				array_caminhos = monta_gabarito(array_triangle)
 
+				#Mapeia o triângulo em um objeto Hash
 				obj_map = convert_mult_array_in_hash(array_triangle)
 
 				array_final = []
+				#Itera todos os caminhos chamando um método recursivo para coletar os valores
 				array_caminhos.each do |caminho|
 					@caminho_real_temp = []
 					count = 0
@@ -27,8 +29,8 @@ class HellTriangle
 				end
 				maior_soma = 0
 
+				#Itera todas as possibilidades para coletar a maior soma dos caminhos
 				array_final.each do |array|
-
 					maior_soma = array.inject(:+) if array.inject(:+) > maior_soma
 				end
 
@@ -57,8 +59,6 @@ class HellTriangle
 		else
 			return @caminho_real_temp
 		end
-		
-
 	end
 
 	#Método para validar se o triângulo é válido
@@ -105,17 +105,19 @@ class HellTriangle
 					obj[key]['pai'] = nil
 				else
 
+				#Se for a primeira posição seu pai sempre será a primeira posição do npivel acima
 				if posicao == 0 
 
 					obj[key]['pai'] =[]
 					obj[key]['pai'] << array_triangle[count_nivel-1].slice(0)
 
+				#Se for a última posição seu pai sempre será a última posição do npivel acima
 				elsif posicao == nivel.index(nivel.last)
-					# puts"posicao == FIM"
+					# procura pelo pai
 					obj[key]['pai'] = []
 					obj[key]['pai'] << array_triangle[count_nivel-1].slice(array_triangle[count_nivel-1].index(array_triangle[count_nivel-1].last))
 				else
-					# puts"posicao == MEIO"
+					# Se for um npo do meio, possuirá 2 pais
 					obj[key]['pai'] = array_triangle[count_nivel-1].slice(posicao-1,posicao + 1)
 				end
 				end
@@ -129,6 +131,7 @@ class HellTriangle
 			end
 			count_nivel += 1
 		end
+		#Retorna um objeto com 
 		obj
 	end
 
@@ -150,18 +153,23 @@ class HellTriangle
 		array_caminhos = []
 		total_pg.times do |value|
 			array_temp = []
+
+			#Monta um número binário, dentro da quantidade de possibilidades, que representará um caminho possível
 			numero_binario = value.to_s.to_i(10).to_s(2)
 			array_temp << numero_binario.split("")
 			tamanho =  array_temp[0].length
 			diferenca = (count_nivel + 1) - tamanho
 			
+			#Preenche os espaços vazios à esquerda do numero binário com 0, para completar o caminho.
 			diferenca.times do |c|
 				array_temp[0].insert(0,"0")
 			end
 
+			#Retorna um caminho montado
 			array_caminhos << array_temp[0]
 		end
 
+		#Retorna o conjunto de todos os caminhos possíveis
 		array_caminhos
 	end
 end
